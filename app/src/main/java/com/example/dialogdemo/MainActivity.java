@@ -2,12 +2,10 @@ package com.example.dialogdemo;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,12 +19,11 @@ import java.util.Calendar;
  *  Extended Dialog Demo - show various Styles of DatePickerDialog
  */
 public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    Button btnQuit;
+    private Button btnQuit;
+    private TextView tvDate;
+    private AlertDialog.Builder builder;
+    private static final String TAG="DialogDemo";
 
-    TextView tvDate;
-    AlertDialog.Builder builder;
-    static final String TAG="DialogDemo";
-    int day, month, year;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,16 +103,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                 break;
         }
 
-        myDateDialog.setTitle(getResources().getString(R.string.dateAlertDialogTitle));
-        myDateDialog.setMessage(getResources().getString(R.string.dateAlertDialogMessage));
+        //myDateDialog.setTitle(getResources().getString(R.string.dateAlertDialogTitle));
+        //myDateDialog.setMessage(getResources().getString(R.string.dateAlertDialogMessage));
         myDateDialog.show();
     }
 
     @Override
-    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        year = i;
-        month = i1;
-        day = i2;
-        tvDate.setText("Selected date is " + (month + 1) +"/" + day + "/" + year);
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        tvDate.setText(String.format("Selected date is %d/%d/%d" ,(month + 1), day, year));
     }
 }
